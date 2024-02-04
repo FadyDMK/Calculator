@@ -2,31 +2,42 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pixelify+Sans">
 </head>
 
 <body>
-    <div class="container">
-        <div class="output"></div>
+    <div class="container pixelart-to-css ">
+        
+        <div class="output">
+            <div class="previous-operand" data-previous-operand>test</div>
+            <div class="current-operand" data-current-operand></div>
+        </div>
         <div class="input">
+            <div class="wrapper-3">
+                <button id="inverse" data-inverse>+/-</button>
+                <button id="mod" data-mod>%</button>
+                <button id="reset" data-reset>AC</button>
+                <button id="clear" data-clear>C</button>
+
+            </div>
             <div class="wrapper-1">
                 <div class="numbers"></div>
                 <div class="operations">
-                    <div id="divide">/</div>
-                    <div id="sub">-</div>
-                    <div id="add">+</div>
-                    <div id="multiply">x</div>
+                    <button id="divide" data-operation>/</button>
+                    <button id="sub" data-operation>-</button>
+                    <button id="add" data-operation>+</button>
+                    <button id="multiply" data-operation>x</button>
                 </div>
             </div>
             <div class="wrapper-2">
                 <div class="small">
-                    <div>0</div>
-                    <div>.</div>
+                    <button data-number>0</button>
+                    <button data-number>.</button>
                 </div>
-                <div class="equals">=</div>
+                <button class="equals" data-equals>=</button>
             </div>
 
         </div>
