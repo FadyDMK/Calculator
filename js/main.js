@@ -66,6 +66,11 @@ class Calculator {
                 break;
             case '/':
                 result = prev / curr;
+                if (curr === 0){
+                    alert('💥 *explosion* 💥');
+                    this.reset();
+                    return
+                }
                 break
             case 'x':
                 result = prev * curr;
