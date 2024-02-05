@@ -5,8 +5,8 @@ class Calculator {
         this.reset();
     }
 
-    clear() {
-
+    delete() {
+        this.currentOperand = this.currentOperand.toString().slice(0, -1);
 
     }
 
@@ -21,15 +21,16 @@ class Calculator {
     appendNumber(number) {
 
         if (number === '.' && this.currentOperand.includes('.')) return;
-
         this.currentOperand += number;
 
     }
 
 
     chooseOperation(operation) {
-        if (this.currentOperand === '')return;
-        
+        if (this.currentOperand === '') return;
+        if (this.previousOperand !== '') {
+            this.compute();
+        }
         this.operation = operation;
         this.previousOperand = this.currentOperand + ' ' + operation;
         this.currentOperand = '';
@@ -38,9 +39,43 @@ class Calculator {
 
     }
 
+    inverse(){
+        if (this.currentOperand === '') return;
+        this.currentOperand = (- parseFloat(this.currentOperand)).toString();
+    }
+
+    mod(){
+        if (this.currentOperand === '') return;
+        this.currentOperand = (parseFloat(this.currentOperand)/100).toString();
+
+    }
+
+
 
     compute() {
-
+        let result;
+        const prev = parseFloat(this.previousOperand);
+        const curr = parseFloat(this.currentOperand);
+        if (isNaN(prev) || isNaN(curr)) return
+        switch (this.operation) {
+            case '+':
+                result = prev + curr;
+                break;
+            case '-':
+                result = prev - curr;
+                break;
+            case '/':
+                result = prev / curr;
+                break
+            case 'x':
+                result = prev * curr;
+                break
+            default:
+                return
+        }
+        this.currentOperand = result;
+        this.operation = undefined;
+        this.previousOperand = '';
     }
 
     updateDisplay() {
@@ -53,7 +88,7 @@ class Calculator {
 
 const numbers = document.querySelector('.numbers');
 for (let i = 0; i < 9; i++) {
-    const number = document.createElement('div');
+    const number = document.createElement('button');
     number.textContent = (i + 1);
     number.setAttribute("data-number", i);
     number.classList.add('number');
@@ -81,6 +116,24 @@ const currentOperandTextContent = document.querySelector('[data-current-operand]
 const calculator = new Calculator(previousOperandTextContent, currentOperandTextContent);
 
 
+modButton.addEventListener('click', () => {
+    calculator.mod();
+    calculator.updateDisplay();
+})
+
+
+inverseButton.addEventListener('click', () => {
+    calculator.inverse();
+    calculator.updateDisplay();
+})
+
+
+
+clearButton.addEventListener('click', () => {
+    calculator.delete();
+    calculator.updateDisplay();
+})
+
 numberButtons.forEach(e => {
     e.addEventListener('click', () => {
         calculator.appendNumber(e.textContent);
@@ -94,6 +147,19 @@ operationButtons.forEach(e => {
         calculator.chooseOperation(e.textContent);
         calculator.updateDisplay();
     })
-})
+});
+
+equalsButton.addEventListener('click', () => {
+    calculator.compute();
+    calculator.updateDisplay();
+});
+
+
+
+resetButton.addEventListener('click', () => {
+    calculator.reset();
+    calculator.updateDisplay();
+});
+
 
 
