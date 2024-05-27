@@ -3,8 +3,6 @@
 
     font-weight: 900;
     font-size: 30px;
-
-    height: 100vh;
     margin: 0;
     padding: 0;
     background-color: #c2fcf4;
@@ -18,8 +16,9 @@
 .container {
     background-color: #eefcfa;
 
-    height: 800px;
-    width: 600px;
+    height: 80vh;
+    max-width: 70vw;
+    min-width: 400px;
     border-style: solid;
     border-radius: 100px;
     border-color: #549d95;
